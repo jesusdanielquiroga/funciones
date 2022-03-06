@@ -1,0 +1,835 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Funciones Matemáticas para Data Science e Inteligencia Artificial</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+}
+
+.simple-table-header {
+	background: rgb(247, 246, 243);
+	color: black;
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="c604e02b-4716-4584-8f8a-a1870c652c31" class="page sans"><header><img class="page-cover-image" src="https://images.unsplash.com/photo-1573952106639-694daec2b88a?ixlib=rb-1.2.1&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">🧑🏽‍🏫</span></div><h1 class="page-title"><strong>Funciones Matemáticas para Data Science e Inteligencia Artificial</strong></h1></header><div class="page-body"><ul id="a2f0c70c-aa3a-47c7-9d82-8c1979c8ca2d" class="block-color-red toggle"><li><details open=""><summary><strong>Herramientas para graficar</strong></summary><p id="4ad01fbd-0c80-4ce6-879d-a61b2c7ac66f" class=""><a href="https://www.geogebra.org/graphing?lang=es">https://www.geogebra.org/graphing?lang=es</a></p></details></li></ul><p id="8fd7f9c2-71ee-4c57-9d2f-07b909321e29" class="">Las matemáticas son una herramienta que nos permite abordar problemas reales para analizarlos, entenderlos y estudiarlos, pueden llegar a ser muy complejas pero son muy necesarias para resolver problemas.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="a7191697-c607-4f2d-9a80-34052d71d50c"><div style="font-size:1.5em"><span class="icon">🤖</span></div><div style="width:100%"><em>“Las funciones nos permiten modelar nuestra realidad”</em></div></figure><ul id="96886721-66c9-45b3-b75e-330a4f7e7d29" class="toggle"><li><details open=""><summary><strong><strong>¿Qué es una función?</strong></strong></summary><p id="e15d43a5-472f-4302-9e34-1bca02ae6c69" class="block-color-blue_background">Una función matemática es una relación que se establece entre dos conjuntos, a través de la cual a cada elemento del primer conjunto se le asigna un único elemento del segundo conjunto o ninguno. Al conjunto inicial o conjunto de partida también se lo llama <strong>dominio(variable independiente)</strong>; al conjunto final o conjunto de llegada, en tanto, se lo puede denominar <strong>codominio(variable dependiente)</strong>.</p><figure id="58138bf8-6fe0-4a55-819c-a0267a98b238" class="image"><a href="Funciones%20%2058138/Untitled.png"><img style="width:672px" src="Funciones%20%2058138/Untitled.png"/></a></figure><p id="24fafa44-5fe6-4e16-b65b-1ef53c1b92b9" class="">
+</p></details></li></ul><ul id="9b6d88d0-8c11-4c8f-8bab-7a2f467d2f13" class="toggle"><li><details open=""><summary><strong><strong>Tipos de variables</strong></strong></summary><figure id="9a4ef929-dfa6-4f3c-9a00-a4213f8309d2" class="image"><a href="Funciones%20%2058138/Untitled%201.png"><img style="width:672px" src="Funciones%20%2058138/Untitled%201.png"/></a></figure><p id="e0e50000-fd81-457a-8c67-c2d64931c4e2" class="">Podemos dividir las variables en dos grandes grupos <mark class="highlight-red"><strong>cualitativas o categóricas</strong></mark><strong> </strong>y <mark class="highlight-red"><strong>cuantitativas o numéricas. </strong></mark></p><ul id="ba6dbbb7-74a7-41fd-8f6f-aa9e3c79c9d8" class="toggle"><li><details open=""><summary><mark class="highlight-teal"><strong>Variables cualitativas o categóricas</strong></mark></summary><p id="114365fe-7c3f-4a20-b68d-b6d0c7ac6c09" class="">Si sus valores no se pueden asociar a un número:</p><p id="8f50e96f-a6e7-404c-974f-c1ff4df75176" class=""><strong>Variables nominales</strong></p><p id="0f4923fb-e9f3-4a9f-becd-5eae86114d4e" class="">Variables nominales: Se les asigna una cualidad pero no es ordenable (rojo, verde, azul, etc. en el caso de un LED)</p><p id="de3f44e0-5eab-4211-8e22-dd2f3e52c4cf" class=""><strong>Variables ordinales</strong></p><p id="f6d55208-61d7-4c99-a7e8-11bae5059612" class="">Representan un orden. Por ejemplo, la altura de un objetos se puede clasificar como alto, medio o bajo. </p><p id="3b8a85a1-2f00-4dd6-b48b-49500d451db6" class=""><strong>Variables binarias</strong></p><p id="6b5c964c-1fcb-48b8-b038-fb8eb523bdee" class="">Solo toman 2 valores, usualmente usadas para representar estados. (frío o caliente, uno o cero)</p></details></li></ul><ul id="4a65e610-db20-4935-a0a9-1499cbd46105" class="toggle"><li><details open=""><summary><mark class="highlight-orange"><strong>Variables cuantitativas o numéricas</strong></mark></summary><p id="b30679df-2d05-4506-afec-e412d24383c5" class="">Si sus valores son numéricos</p><p id="d483b28f-8fa1-41c9-bf81-0eebdbc4c1de" class=""><strong>Variables discretas (enteros)</strong></p><p id="17490009-2562-4a26-ad03-bd2389f44a96" class="">Representan un grupo de datos que son finitos y toman ciertos valores. Pueden verse como variables separadas por un “paso”. Por ejemplo, una persona puede tener 0,1,2,3 amigos pero no <mark class="highlight-orange"><span style="border-bottom:0.05em solid">3.5 amigos</span></mark></p><p id="bea8557c-77a6-47a6-a2ad-52012399c321" class=""><strong>Variables continuas (flotantes)</strong></p><p id="b6286607-71d4-4be8-b01e-4d8b2ac4f6c2" class="">Sus valores pueden verse como infinitos al tomar cualquier valor dentro de los números reales en un rango establecido. Por ejemplo, la altura de una persona.</p></details></li></ul><p id="7a3203dc-558c-422f-812c-4d514efa9e1d" class="">
+</p></details></li></ul><ul id="7dfa8a51-bc76-450e-a1aa-9deea73b99d6" class="toggle"><li><details open=""><summary><strong>¿Qué valores pueden tener las funciones?</strong></summary><p id="016f9983-5025-4926-b613-e56c24b4ff29" class=""><strong>Dominio</strong></p><p id="ef4e810e-6006-4001-a140-f51dcf66ee27" class="">Son los valores que toma <strong>x</strong> y que están definidos en la función <strong>f(x)</strong></p><p id="4e7663cf-4f1d-4f02-8986-f13eebecf6af" class=""><strong>Rango</strong></p><p id="aed6e340-a6ee-492b-b21f-3a2b10231b76" class="">Son los valores que puede regresar una función.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="8528f63d-3026-484f-9f09-76ab79cd0d14"><div style="font-size:1.5em"><span class="icon">🔤</span></div><div style="width:100%">(En gramática, probablemente le llame al dominio el conjunto reemplazo y al rango el conjunto solución. Quizá también estos han sido llamados la entrada y salida de la función.)</div></figure></details></li></ul><ul id="bc5f1263-a3f9-4c00-8f73-92a8c3507bd9" class="toggle"><li><details open=""><summary><strong><strong>Símbolos generales</strong></strong></summary><figure id="db2a9bc8-b2bf-40f0-be0b-947802cd5eae" class="image"><a href="Funciones%20%2058138/Untitled%202.png"><img style="width:1098px" src="Funciones%20%2058138/Untitled%202.png"/></a></figure><p id="7c74ca02-d198-4a09-9dd7-c70bf4930330" class="">
+</p></details></li></ul><ul id="773a0586-128d-4c20-ae93-0e4046532dc9" class="toggle"><li><details open=""><summary><strong>Conjuntos</strong></summary><p id="f0761c7b-ba5a-411d-a668-da4c0a543058" class="">Un <strong>conjunto </strong> es una colección de <strong>elementos</strong>. Normalmente están caracterizados por compartir alguna propiedad. Para que un conjunto esté bien definido debe ser posible discernir si un elemento arbitrario está o no en él.</p><p id="65162ef4-68fd-4926-91c9-38100dc350c8" class="">Los conjuntos pueden definirse de manera <strong>explícita</strong>, citando todos los elementos de los que consta <em>entre llaves:</em></p><figure id="f0efd540-abc1-4a82-b983-cd336720070c" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>A</mi><mo>=</mo><mo stretchy="false">{</mo><mn>1</mn><mo separator="true">,</mo><mn>2</mn><mo separator="true">,</mo><mn>3</mn><mo separator="true">,</mo><mn>4</mn><mo separator="true">,</mo><mn>5</mn><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">A=\{1,2,3,4,5\}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">3</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">4</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">5</span><span class="mclose">}</span></span></span></span></span></div></figure><p id="2d41a776-42ab-496f-abc1-bb945bb3c845" class="">o <strong>implícita</strong>, dando una o varias características que determinen si un elemento dado está o no en el conjunto:</p><figure id="79abe928-d8df-4128-957c-2e3507fd502c" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>A</mi><mo>=</mo><mo stretchy="false">{</mo><mi>n</mi><mi>u</mi><mi>m</mi><mi>e</mi><mi>r</mi><mi>o</mi><mi>s</mi><mtext> </mtext><mi>n</mi><mi>a</mi><mi>t</mi><mi>u</mi><mi>r</mi><mi>a</mi><mi>l</mi><mi>e</mi><mi>s</mi><mtext> </mtext><mi>d</mi><mi>e</mi><mi>l</mi><mtext> </mtext><mn>1</mn><mtext> </mtext><mi>a</mi><mi>l</mi><mtext> </mtext><mn>5</mn><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">A=\{numeros \ naturales\ del \ 1 \ al \ 5\}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord mathnormal">n</span><span class="mord mathnormal">u</span><span class="mord mathnormal">m</span><span class="mord mathnormal">eros</span><span class="mspace"> </span><span class="mord mathnormal">na</span><span class="mord mathnormal">t</span><span class="mord mathnormal">u</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">es</span><span class="mspace"> </span><span class="mord mathnormal">d</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mspace"> </span><span class="mord">1</span><span class="mspace"> </span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mspace"> </span><span class="mord">5</span><span class="mclose">}</span></span></span></span></span></div></figure><p id="97c40b14-d98d-440b-bd5f-9a114d19c019" class="">Según su número de elementos, los conjuntos se pueden clasificar como finitos o infinitos. La <strong>cardinalidad</strong> de un conjunto <strong>A</strong> es la cantidad de elementos diferentes que tiene y se representa con |A|. Un conjunto es finito si se conoce su cardinalidad (podemos contar sus elementos) e infinito si se desconoce su cardinalidad (no podemos contar sus elementos).</p><p id="7995dce8-0acc-46e9-9934-f7379aa20c8b" class=""><strong>Diagramas de Venn </strong></p><p id="07f62377-e6ce-4986-8770-975b53cdbdf6" class="">Los diagramas de Venn son otra forma de representar un conjunto de manera gráfica. Los diagramas nos permiten comprender y analizar fácilmente los conjuntos.</p><figure id="d1a4cb07-e3be-4ba8-9301-1449621165c6" class="image"><a href="Funciones%20%2058138/Untitled%203.png"><img style="width:1375px" src="Funciones%20%2058138/Untitled%203.png"/></a></figure><p id="1147d905-d8a3-424e-99cb-6c6dc6d22476" class=""><strong>Conjunto Vacío</strong></p><p id="18d58e07-69ac-41cd-81d0-af9bf4e4773c" class="">Al conjunto que no contiene elementos se le llama conjunto vació y se denota con el símbolo ϕ</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="3d307f4b-617c-4f59-8ec8-cfcee5281baf"><div style="font-size:1.5em"><span class="icon">🔢</span></div><div style="width:100%">Observación: El conjunto que tenga solo el elemento 0 o el ϕ es no vacío.</div></figure><figure id="4c4a47fa-c7df-4a4a-88aa-93f888defc38" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>∅</mtext><mo>=</mo><mo stretchy="false">{</mo><mo stretchy="false">}</mo><mo separator="true">,</mo><mi>o</mi><mtext> </mtext><mi>b</mi><mi>i</mi><mi>e</mi><mi>n</mi><mtext> </mtext><mi mathvariant="normal">∀</mi><mi>x</mi><mo separator="true">,</mo><mtext> </mtext><mi>x</mi><mo mathvariant="normal">∉</mo><mi mathvariant="normal">∅</mi><mi mathvariant="normal">∀</mi><mi>x</mi><mo separator="true">,</mo><mtext> </mtext><mi>x</mi><mo>∈</mo><mi mathvariant="normal">/</mi><mtext>∅</mtext><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">∅=\{ \}, o \ bien \ \forall x, \ x\notin \varnothing∀x, \ x∈/∅.</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.80556em;vertical-align:-0.05556em;"></span><span class="mord">∅</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mclose">}</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">o</span><span class="mspace"> </span><span class="mord mathnormal">bi</span><span class="mord mathnormal">e</span><span class="mord mathnormal">n</span><span class="mspace"> </span><span class="mord">∀</span><span class="mord mathnormal">x</span><span class="mpunct">,</span><span class="mspace"> </span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel"><span class="mord"><span class="mrel">∈</span></span><span class="mord vbox"><span class="thinbox"><span class="llap"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="inner"><span class="mord"><span class="mord">/</span><span class="mspace" style="margin-right:0.05555555555555555em;"></span></span></span><span class="fix"></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord amsrm">∅</span><span class="mord">∀</span><span class="mord mathnormal">x</span><span class="mpunct">,</span><span class="mspace"> </span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">/∅.</span></span></span></span></span></div></figure><p id="9496e99c-d872-4f51-b7f0-4ff82c3551b6" class=""><strong>Conjunto Unitario</strong></p><p id="8f2c1c27-2a87-4e98-b864-530db7766107" class="">Un conjunto es <strong>unitario </strong> si contiene un único elemento, como por ejemplo:</p><figure id="d779faab-b11a-4639-a41d-3d0517cafed2" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo stretchy="false">{</mo><mn>0</mn><mo stretchy="false">}</mo><mo separator="true">,</mo><mo stretchy="false">{</mo><mn>1</mn><mo stretchy="false">}</mo><mo separator="true">,</mo><mo stretchy="false">{</mo><mi>a</mi><mo stretchy="false">}</mo><mo separator="true">,</mo><mo stretchy="false">{</mo><mrow><mi>c</mi><mi>a</mi><mi>r</mi><mi>t</mi><mover accent="true"><mi>o</mi><mo>ˊ</mo></mover><mi>n</mi><mi>d</mi><mi>e</mi><mi>l</mi><mi>e</mi><mi>c</mi><mi>h</mi><mi>e</mi><mo stretchy="false">}</mo></mrow><mo separator="true">,</mo><mo stretchy="false">{</mo><mi mathvariant="double-struck">N</mi><mo stretchy="false">}</mo><mo separator="true">,</mo><mo>…</mo></mrow><annotation encoding="application/x-tex">\{0 \}, \{1\} ,\{a\}, \{{cartón de leche\}}, \{\mathbb{N}\}, …</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord">0</span><span class="mclose">}</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mopen">{</span><span class="mord">1</span><span class="mclose">}</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mopen">{</span><span class="mord mathnormal">a</span><span class="mclose">}</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mopen">{</span><span class="mord"><span class="mord mathnormal">c</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">t</span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">o</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.19444em;"><span class="mord">ˊ</span></span></span></span></span></span></span><span class="mord mathnormal">n</span><span class="mord mathnormal">d</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">ec</span><span class="mord mathnormal">h</span><span class="mord mathnormal">e</span><span class="mclose">}</span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mopen">{</span><span class="mord mathbb">N</span><span class="mclose">}</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">…</span></span></span></span></span></div></figure><p id="f7f884b5-a0c4-403c-a9b2-d499c15b1c1c" class=""><strong>Unión</strong></p><p id="dfbb52f1-4e78-4908-aa39-05f312b34664" class="">La <strong>unión</strong> de dos conjuntos <strong>A</strong> y <strong>B</strong> es el conjunto formado por todos los elementos de ambos conjuntos sin repetir ninguno y se representa así: A ∪ B = {x | x ∈ A ó x ∈ B}.</p><p id="cee86ec7-a04d-4402-867f-b4bd19b1514e" class=""><strong>Intersección </strong></p><p id="7aa71966-57b5-4a58-811a-09b219ffd3ae" class="">La <strong>intersección</strong> de dos conjuntos <strong>A</strong> y <strong>B</strong> son el conjunto de elementos que forman parte tanto de A como de B, es decir: A ∩ B = {x | x ∈ A y x ∈ B}.</p><p id="bd79cb4f-2356-49c3-a6a2-63b4f80db077" class=""><strong>Diferencia</strong></p><p id="d39b3426-d58e-4e1a-8ce9-07e8a2097f86" class="">La <strong>diferencia</strong> de dos conjuntos <strong>A</strong> y <strong>B</strong>, es un conjunto formado por todos los elementos de <strong>A</strong> que no están en <strong>B</strong> y se escribe así: A\B = A - B = {x ∈ A | x ∉ B}.</p><p id="d7494b0d-652b-4388-96d3-0aacee5d3efc" class=""><strong>Complemento</strong></p><p id="7987cdfa-e7cb-4448-8410-f2a86222db50" class="">Dados dos conjuntos, el conjunto universal <strong>Ω</strong> que es el conjunto que incluye a todos los elementos y un conjunto <strong>A</strong> subconjunto de Ω. El complemento de <strong>A</strong> son todos aquellos elementos del conjunto universal que no pertenecen a <strong>A</strong>, es decir: A’ = {x ∈ Ω | x ∉ A}. </p><p id="96c81148-bce9-4bd4-bc06-1c6cba37da39" class=""><strong>Conjunto de números</strong></p><figure id="61655ecb-6b0b-49af-ae6e-e62442dc0166" class="image"><a href="Funciones%20%2058138/Untitled%204.png"><img style="width:240px" src="Funciones%20%2058138/Untitled%204.png"/></a></figure><figure id="74156ab1-8839-4e1a-8a56-c725566eb85c" class="image"><a href="Funciones%20%2058138/Untitled%205.png"><img style="width:699px" src="Funciones%20%2058138/Untitled%205.png"/></a></figure><p id="6825ac46-75c6-4f2e-8107-1728e034b87e" class="">
+</p></details></li></ul><ul id="a3f88855-5f49-4d25-9134-74a970a21e39" class="toggle"><li><details open=""><summary><strong>Funciones Algebraicas</strong></summary><p id="23353171-3fab-47c5-a64e-d3b9e58f8a27" class="">Las funciones algebraicas son aquellas cuya regla de correspondencia es una expresión algebraica, siendo a la vez una función que satisface una ecuación polinómica cuyos coeficientes son a su vez polinomios.</p><ul id="691e1c34-4a56-4dfa-9583-7648c226cc0a" class="toggle"><li><details open=""><summary><strong>Función Lineal</strong></summary><p id="dc581947-ccfe-4d01-b0f6-8760915aa895" class="">Una función lineal es una función polinómica de primer grado. Es decir, tiene la siguiente forma</p><p id="aac59cdc-6674-4ab3-b757-e6ca21637796" class=""><strong>f(x) =m*x + b</strong></p><p id="652d2cff-bdab-41b6-8fa8-65a84b22c3dd" class=""><strong>m</strong> es la pendiente de la función. </p><p id="26c4bb54-c1c6-471b-9bf2-44ccbdc8776f" class=""><strong>b</strong> es la ordenada (en el origen) de la función. Es el punto de corte con el eje y. </p><pre id="379d8a04-b313-4e9d-a63d-7e33811aefd2" class="code code-wrap"><code># librería para graficar
+import matplotlib.pyplot as plt             
+# librería para manejo de vectores y utilidades matemáticas
+import numpy as np  
+# numero de particiones para dibujar la funcion
+N = 100
+#Definimos la Funcion lineal
+def f(x):
+	m = -1
+	b = 3
+  return m * x + b
+
+x = np.linspace(-10,10, num=N)
+y = f(x)
+
+fig, ax = plt.subplots()
+ax.plot(x,y)
+ax.grid() </code></pre></details></li></ul><ul id="7c4463c9-79a5-434a-8bd6-a750fad5e1c3" class="toggle"><li><details open=""><summary><strong>Función polinómica</strong></summary><p id="ecb24aaf-eb58-40bc-b537-52bb38ff3483" class="">Una <strong>función polinómica </strong> <em>f </em> es una función cuya expresión es un <strong>polinomio </strong>tal como:</p><figure id="8c292a6c-8dbb-4e6f-b5f7-9a12215866e1" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><msub><mi>a</mi><mi>n</mi></msub><msup><mi>x</mi><mi>n</mi></msup><mo>+</mo><msub><mi>a</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><msup><mi>x</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>+</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo>+</mo><msub><mi>a</mi><mn>2</mn></msub><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><msub><mi>a</mi><mn>1</mn></msub><mi>x</mi><mo>+</mo><msub><mi>a</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">P(x)=a_{n}x^{n} + a_{n-1}x^{n-1}+...+a_{2}x^{2}+a_{1}x + a_{1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8643919999999999em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7143919999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.072439em;vertical-align:-0.208331em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.864108em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord">...</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.0141079999999998em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.73333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span></div></figure><p id="cc914b65-860f-482a-9a4b-8c65e0c42db0" class="">El <strong>dominio</strong> de las funciones polinómicas son todos los <strong>números reales</strong>.</p><p id="01edf58c-d0f9-451d-9cb4-cddc9b47dd76" class="">Las funciones polinómicas son <strong>continuas</strong> en todo su dominio.</p><p id="e9d060e0-0791-46fb-af1c-85fe0a1db4f6" class="">Los <strong>exponentes</strong> (o índices) son positivos y enteros.</p><p id="d04929bf-bd02-45fb-96bc-c3c8b53b21c2" class="">Se llama <strong>grado</strong> de una función polinómica al mayor exponente de sus términos.</p><p id="b26c5d78-ad8a-4dd3-a6e4-bd857f1b19c1" class="">Los diferentes <em>a</em>, son números reales llamados <strong>coeficientes de un polinomio</strong>.</p><figure id="c88c38b7-94a2-4095-a4d0-13dbe573221a" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mtext> </mtext><mn>2</mn><msup><mi>x</mi><mn>7</mn></msup><mtext> </mtext><mo>−</mo><mtext> </mtext><msup><mi>x</mi><mn>4</mn></msup><mtext> </mtext><mo>+</mo><mtext> </mtext><mn>3</mn><msup><mi>x</mi><mn>2</mn></msup><mtext> </mtext><mo>+</mo><mtext> </mtext><mn>4</mn></mrow><annotation encoding="application/x-tex">P(x)= 2x^{7} - x^{4} + 3x^{2} + 4</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.9474379999999999em;vertical-align:-0.08333em;"></span><span class="mord"> 2</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">7</span></span></span></span></span></span></span></span></span><span class="mord"> </span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.9474379999999999em;vertical-align:-0.08333em;"></span><span class="mord"> </span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">4</span></span></span></span></span></span></span></span></span><span class="mord"> </span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.9474379999999999em;vertical-align:-0.08333em;"></span><span class="mord"> 3</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mord"> </span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord"> 4</span></span></span></span></span></div></figure><pre id="64b8e0c1-5745-4e4c-823c-423a6f8ca010" class="code code-wrap"><code>def f(x):
+  return (2*x**7) -(x**4) +(3*x**2)+4
+
+y = f(x)
+
+plt.plot(x,y)
+plt.grid()</code></pre><ul id="08411584-44a9-4f92-8043-0640012cf076" class="toggle"><li><details open=""><summary><strong>Funciones potencia</strong></summary><p id="ac73713d-a1d5-4672-819f-631d958d8665" class="">Hay unas funciones que son un caso particular de las funciones polinómicas que son las funciones potencia, las cuales tienen la forma:</p><figure id="40aa83c6-a453-4e1c-9a2d-12d8dfd58cdd" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><msup><mi>x</mi><mi>a</mi></msup><mo separator="true">,</mo><mi>a</mi><mo>∈</mo><mi>R</mi><mspace linebreak="newline"></mspace><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mtext> </mtext><msup><mi>x</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">f(x)= x^{a}, a \in R \\ f(x)= x^{2}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.9088319999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7143919999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">a</span></span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">a</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8641079999999999em;vertical-align:0em;"></span><span class="mord"> </span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span></span></div></figure><pre id="cb77304a-9a4c-4a67-af1c-610fa630c2b1" class="code code-wrap"><code>def f(x):
+  return x**7
+
+y = f(x)
+
+plt.plot(x,y)
+plt.grid()</code></pre></details></li></ul></details></li></ul></details></li></ul><ul id="70abe508-a835-48a2-bb63-72abe4e17414" class="toggle"><li><details open=""><summary><strong>Funciones Trascendentes</strong></summary><p id="7fcdb055-5db1-4bda-b1eb-05aabaa76bdd" class="">Son funciones que no pueden ser expresadas con polinomios.  Una <strong>función trascendente </strong>es una función que trasciende al álgebra, en el sentido que no puede ser expresada en términos de una secuencia finita de operaciones algebraicas de suma, resta y extracción de raíces (pero sí se puede expresar como una &quot;suma infinita&quot;). Hemos usado varias funciones trascendentes, como la función seno, coseno y tangente.</p><ul id="7bb9d96b-c78a-4aa2-9381-6473e866197f" class="toggle"><li><details open=""><summary><strong>Funciones Trigonométricas</strong></summary><p id="db10c6a3-1184-4c16-a988-4fc7ed6f908c" class="">Una función trigonométrica es importante por el hecho de tener un patrón y ser repetitiva, esto le da la capacidad al que la utiliza de poder interpretar ciertos actos físicos que requieren de cierta repetitividad para funcionar. Las funciones trigonométricas mas utilizadas son: seno, coseno, tangente, cotangente, secante, cosecante.
+La siguiente tabla que muestra algunos datos importantes de las funciones trigonométricas mas comunes:</p><figure id="c8403635-5a85-44ca-a550-9b4c1b2712a1" class="image"><a href="Funciones%20%2058138/Untitled%206.png"><img style="width:1141px" src="Funciones%20%2058138/Untitled%206.png"/></a></figure><pre id="4d52cfb4-cb2e-4b3d-8a3d-7e0908bdfd0c" class="code code-wrap"><code>def f(x):
+  return np.cos(x)
+	#return np.sin(x)
+	#return np.tan(x)
+y = f(x)
+
+plt.plot(x,y)</code></pre><figure id="7dfbbf6b-20b2-40be-ae49-cf220f6d98f8" class="image"><a href="Funciones%20%2058138/Untitled%207.png"><img style="width:667px" src="Funciones%20%2058138/Untitled%207.png"/></a><figcaption><strong>Graficas de las funciones trigonométricas </strong></figcaption></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="005af78c-5374-45b9-8c06-d219e8cf8174"><div style="font-size:1.5em"><span class="icon">📐</span></div><div style="width:100%">Las funciones TRIGONOMÉTRICAS se definen en términos de los lados de un triángulo rectángulo como se muestra a continuación:<figure id="b7e6f211-3092-4bff-bdd6-fe30cb6c6733" class="image"><a href="Funciones%20%2058138/Untitled%208.png"><img style="width:336px" src="Funciones%20%2058138/Untitled%208.png"/></a></figure></div></figure></details></li></ul><ul id="b7271d2e-45a2-455c-9f6d-f96b6fe918a1" class="toggle"><li><details open=""><summary><strong>Función exponencial</strong></summary><p id="3e10c865-826f-4af2-b046-267e15083520" class=""><strong>Las funciones exponenciales se usan para hacer modelos </strong>de numerosos fenómenos del mundo real, como por ejemplo el crecimiento de una población o el crecimiento de una inversión que gana interés compuesto. Una vez obtenido el modelo exponencial, <strong>podemos usar el modelo para predecir </strong>el tamaño poblacional o calcular la cantidad de una inversión para cualquier fecha futura.</p><figure id="d312028f-4e44-44cb-816c-fdd237767b92" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><msup><mi>a</mi><mi>x</mi></msup></mrow><annotation encoding="application/x-tex">f(x)=a^x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.7143919999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7143919999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">x</span></span></span></span></span></span></span></span></span></span></span></span></div></figure><p id="ee1ef13e-ded0-4569-90af-348f3f82391f" class="">Donde la base <strong>a</strong> es una constante positiva (real). Un gran ejemplo de una función exponencial es usando la base como el número de euler:</p><pre id="ae80e7ce-684e-4b36-b625-f824c1d1939b" class="code code-wrap"><code>def f(x):
+  return np.exp(x)
+
+y=f(x)
+
+plt.plot(x,y)</code></pre></details></li></ul><ul id="08d6cf8a-92a6-4761-9312-418f688700ce" class="toggle"><li><details open=""><summary>F<strong>unción Logarítmica</strong></summary><p id="59f78fbd-e93a-4ad6-a396-be806ffa1f27" class="">Una <strong>función logarítmica </strong>está formada por un <strong>logaritmo </strong>de base b, y es de la forma:</p><figure id="e1ac8fe4-9999-4819-8676-360c23885c68" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>l</mi><mi>o</mi><msub><mi>g</mi><mi>b</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mi>n</mi><mo>⟺</mo><mi>x</mi><mo>=</mo><msup><mi>b</mi><mi>n</mi></msup><mspace linebreak="newline"></mspace><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mi>l</mi><mi>o</mi><msub><mi>g</mi><mi>b</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">log_{b}(x) = n \Longleftrightarrow x=b^n \\ f(x)=log_{b}(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">b</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.549em;vertical-align:-0.024em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">⟺</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.7143919999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathnormal">b</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7143919999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">b</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span></span></div></figure><p id="6fb16122-3cef-44ef-9d5e-29e442b4b0bb" class="">siendo b un real positivo, b &gt; 0, y diferente de 1, b ≠ 1. Cuando 0 &lt; b &lt; 1, entonces  la <strong>función logarítmica </strong>es una <strong>función decreciente </strong>y cuando b &gt; 1, entonces es una <strong>función creciente.</strong></p><pre id="a1a8dbd8-730c-426a-8c5b-33e4aa7cea62" class="code code-wrap"><code>def f(x):
+  return np.log2(x)
+
+x = np.linspace(0.001,256, num=1000)
+plt.plot(x,f(x))</code></pre><p id="0210046e-7abf-4bef-8de3-c854cbc1e523" class="">La <strong>función logarítmica </strong>es la inversa de la función exponencial
+</p><figure id="eeb51d7e-bb19-44e1-aa21-2e5ffa0c5af7" class="image"><a href="Funciones%20%2058138/Untitled%209.png"><img style="width:288px" src="Funciones%20%2058138/Untitled%209.png"/></a></figure><p id="ae49133e-e241-4253-a908-1e709f90d1ea" class="">
+</p></details></li></ul></details></li></ul><ul id="c3605807-bf91-4ed8-91c7-6720a03ccfde" class="toggle"><li><details open=""><summary><strong>Función Seccionada</strong></summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="22ddfcc8-d4d0-4fde-8aee-42455bf8b1b0"><div style="font-size:1.5em"><span class="icon">👨🏻‍🎓</span></div><div style="width:100%">“Las funciones seccionadas son aquellas que están compuestas por funciones individuales, cuando se agrupan en una sola función, da como resultado una función seccionada.”</div></figure><p id="80fe8c83-0eef-44b3-a9db-55f2fb9dcdb9" class=""><a href="https://www.oercommons.org/authoring/10613-funciones-seccionadas/view#:~:text=%E2%80%9CLas%20funciones%20seccionadas%20son%20aquellas,como%20resultado%20una%20funci%C3%B3n%20seccionada.%E2%80%9D">https://www.oercommons.org/authoring/10613-funciones-seccionadas/view#:~:text=“Las funciones seccionadas son aquellas,como resultado una función seccionada.”</a></p><p id="96f33b1b-6024-43ad-a7dd-73108953eafc" class="">Son funciones que tienen diferentes valores definidos por un intervalo. Por ejemplo la función escalón de Heaviside:</p><figure id="713de264-25f6-4c0b-aac4-a6905b5135b2" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>H</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mtext> </mtext><mo>=</mo><mtext>      </mtext><mrow><mo fence="true">{</mo><mtable rowspacing="0.3600em" columnalign="left left" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mtext>        </mtext><mn>0</mn><mo separator="true">,</mo><mtext> </mtext></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mspace width="1em"/><mtext> para,  </mtext><mi>x</mi><mtext> </mtext><mo>&lt;</mo><mtext> </mtext><mn>0</mn><mtext> </mtext></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mtext>        </mtext><mn>1</mn><mo separator="true">,</mo><mtext>  </mtext></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mspace width="1em"/><mtext>para.  </mtext><mi>x</mi><mtext> </mtext><mo>≥</mo><mtext> </mtext><mn>0</mn><mtext> </mtext></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mtext>     </mtext></mstyle></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">H(x) =      \begin{cases}        0, &amp;\quad \text{para, } x &lt; 0 \\        1,  &amp;\quad\text{para. } x \ge 0 \\     \end{cases}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mord"> </span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:4.32em;vertical-align:-1.9099999999999997em;"></span><span class="mord">      </span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.3500199999999998em;"><span style="top:-2.19999em;"><span class="pstrut" style="height:3.15em;"></span><span class="delimsizinginner delim-size4"><span>⎩</span></span></span><span style="top:-2.19199em;"><span class="pstrut" style="height:3.15em;"></span><span style="height:0.31599999999999984em;width:0.889em;"><svg width='0.889em' height='0.31599999999999984em' style='width:0.889em' viewBox='0 0 889 316' preserveAspectRatio='xMinYMin'><path d='M384 0 H504 V316 H384z M384 0 H504 V316 H384z'/></svg></span></span><span style="top:-3.15001em;"><span class="pstrut" style="height:3.15em;"></span><span class="delimsizinginner delim-size4"><span>⎨</span></span></span><span style="top:-4.292009999999999em;"><span class="pstrut" style="height:3.15em;"></span><span style="height:0.31599999999999984em;width:0.889em;"><svg width='0.889em' height='0.31599999999999984em' style='width:0.889em' viewBox='0 0 889 316' preserveAspectRatio='xMinYMin'><path d='M384 0 H504 V316 H384z M384 0 H504 V316 H384z'/></svg></span></span><span style="top:-4.600019999999999em;"><span class="pstrut" style="height:3.15em;"></span><span class="delimsizinginner delim-size4"><span>⎧</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.8500199999999998em;"><span></span></span></span></span></span></span><span class="mord"><span class="mtable"><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.41em;"><span style="top:-4.41em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord">        0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"> </span></span></span><span style="top:-2.97em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord">        1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">  </span></span></span><span style="top:-1.5300000000000002em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord">     </span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.9099999999999997em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:1em;"></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.41em;"><span style="top:-4.41em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mspace" style="margin-right:1em;"></span><span class="mord"> </span><span class="mord text"><span class="mord">para, </span></span><span class="mord"> </span><span class="mord mathnormal">x</span><span class="mord"> </span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord"> 0 </span></span></span><span style="top:-2.97em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mspace" style="margin-right:1em;"></span><span class="mord text"><span class="mord">para. </span></span><span class="mord"> </span><span class="mord mathnormal">x</span><span class="mord"> </span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≥</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord"> 0 </span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.46999999999999975em;"><span></span></span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></div></figure><pre id="e427d789-4577-4056-8768-b4767df84a40" class="code code-wrap"><code>def H(x):
+  Y = np.zeros(len(x))
+  for idx,x in enumerate(x):
+    if x&gt;=0:
+      Y[idx]=1
+  return Y
+    
+
+N=1000
+
+x = np.linspace(-10,10, num=N)
+
+y = H(x)
+
+plt.plot(x,y)</code></pre></details></li></ul><ul id="c1105ad5-8bfb-42e7-960a-babe08dae26e" class="toggle"><li><details open=""><summary><strong><strong>Funciones compuestas</strong></strong></summary><p id="e5087765-5d99-4730-9778-6aa03f3c0e8e" class="">Una <strong>función compuesta </strong>se obtiene cuando se pasa como argumento de la función principal el valor de otra función. </p><figure id="a3bf6bb9-13d5-4406-a533-b2d64217a862" class="image"><a href="Funciones%20%2058138/Untitled%2010.png"><img style="width:288px" src="Funciones%20%2058138/Untitled%2010.png"/></a></figure><pre id="e7dd2999-cff6-4079-9c76-afc8ba86b7d0" class="code code-wrap"><code>import numpy as np
+import matplotlib.pyplot as plt
+
+N = 1000
+
+x = np.linspace(-10,10, num=N)
+
+def g(x):
+  return x**2
+
+def f(x):
+  return np.sin(x)
+
+y = g(x)
+
+f_o_g = f(g(x))
+
+plt.plot(x,f_o_g)</code></pre></details></li></ul><ul id="27386f15-ae4a-41eb-bc29-30588f2b362b" class="toggle"><li><details open=""><summary><strong><strong>¿Cómo manipular funciones?</strong></strong></summary><p id="d7b7cc84-adf0-4a8c-8ada-5434568d8c24" class="">Para poder manipular las funciones debemos cumplir unas reglas:</p><ul id="5fb91fb7-80af-4183-8dd8-2c5d9878e31e" class="toggle"><li><details open=""><summary><strong>Desplazamientos verticales y horizontales</strong></summary><p id="fe4f23fe-e946-4469-bf2c-240be7797030" class="">Siendo c una constante mayor que cero, entonces la gráfica:</p><ul id="b3be0319-9d63-4cd6-91b0-939cb02584aa" class="bulleted-list"><li style="list-style-type:disc">y=f(x)+c se desplaza  unidades hacia arriba.</li></ul><ul id="819e8771-4bb8-4193-bdb6-6c092ac38ffa" class="bulleted-list"><li style="list-style-type:disc">y=f(x)−c se desplaza  unidades hacia abajo.</li></ul><ul id="69941117-92a0-4737-b662-9d8b1943e9c8" class="bulleted-list"><li style="list-style-type:disc">y=f(x−c) se desplaza  unidades hacia la derecha.</li></ul><ul id="3e32ee2d-9eb6-4568-87ab-984d2206b132" class="bulleted-list"><li style="list-style-type:disc">y=f(x+c) se desplaza  unidades hacia la izquierda.</li></ul><pre id="ec6ac20e-ca23-4be4-b045-665cce63f11e" class="code code-wrap"><code>N = 1000
+
+def f(x):
+  return x**2;
+#Definimos el valor de c, un  numero positivo.
+c = 4
+#Definimos x
+x = np.linspace(-10,10, num=N)
+#Aplicamos las reglas de arriba
+y = f(x - c)
+
+fig, ax = plt.subplots()
+ax.plot(x,y)
+ax.grid()
+ax.axhline(y=0, color=&#x27;r&#x27;)
+ax.axvline(x=0, color=&#x27;r&#x27;)</code></pre></details></li></ul><ul id="a4ea5ddb-157a-4d37-8b62-43c0370d835c" class="toggle"><li><details open=""><summary><strong>Alargamientos y compresiones</strong></summary><p id="d5990086-a40f-4380-840f-cedd4707fb09" class="">Siendo c una constante mayor que cero, entonces la gráfica:</p><ul id="e52d0e1d-1d00-4a43-bfe6-ede689f33702" class="bulleted-list"><li style="list-style-type:disc">y=c *f(x) alarga la gráfica verticalmente en un factor de c</li></ul><ul id="659656f2-a1c3-4705-b448-5fc8010f5e01" class="bulleted-list"><li style="list-style-type:disc">y=1/c*f(x) comprime la gráfica verticalmente en un factor de c</li></ul><ul id="9a10eaf1-ef3e-46bb-b1ff-4f15b7ca71a0" class="bulleted-list"><li style="list-style-type:disc">y=f(c*x) comprime la gráfica horizontalmente en un factor de c</li></ul><ul id="37b19178-23c6-4378-9fc5-4e88d9724368" class="bulleted-list"><li style="list-style-type:disc">y=f(1/c*x) alarga la gráfica horizontalmente en un factor de c<pre id="0e6bcc54-9e0e-417f-8bc5-ff8c73af4f66" class="code code-wrap"><code>N = 1000
+
+def f(x):
+  return np.sin(x);
+
+c = 2
+
+x = np.linspace(-15,15, num=N)
+
+y = f((1/c)*x)
+
+
+fig, ax = plt.subplots()
+ax.plot(x,y)
+ax.grid()
+ax.axhline(y=0, color=&#x27;r&#x27;)
+ax.axvline(x=0, color=&#x27;r&#x27;)</code></pre></li></ul></details></li></ul><ul id="dee97cb4-779b-465e-9da0-f191f7f13749" class="toggle"><li><details open=""><summary><strong>Reflexiones</strong></summary><ul id="563fde48-79d6-462d-8740-f95a01b8bd8b" class="bulleted-list"><li style="list-style-type:disc">y=−f(x) refleja la gráfica respecto al eje x.</li></ul><ul id="a6ece0c4-4ddc-486b-b8d2-2efe8cf0fdcc" class="bulleted-list"><li style="list-style-type:disc">y=f(−x) refleja la gráfica respecto al eje y.</li></ul><pre id="a5da46d1-9527-4db7-88f6-bcb595a9c12a" class="code code-wrap"><code>N = 1000
+
+def f(x):
+  return x**3;
+
+x = np.linspace(-10,10, num=N)
+
+y = f(-x)
+
+fig, ax = plt.subplots()
+ax.plot(x,y)
+ax.grid()
+ax.axhline(y=0, color=&#x27;r&#x27;)
+ax.axvline(x=0, color=&#x27;r&#x27;)</code></pre></details></li></ul></details></li></ul><ul id="65fd908d-be7e-4477-a178-de0d8fc58f27" class="toggle"><li><details open=""><summary><strong><strong>Características de las funciones</strong></strong></summary><p id="c85be9cb-c1e8-4e98-9f95-b6fcf734c803" class=""><strong>¿Qué son las funciones reales?</strong></p><p id="159be88f-fe29-4a64-86c1-d2c31953c763" class="">Se les llama funciones reales porque tanto su dominio como el codominio (recuerda que al codominio también se le puede llamar rango o imagen) están contenidos en el conjunto de los números reales. Es decir, el conjunto que contiene a los números racionales e irracionales. En otras palabras cualquier número que se te ocurra que no sea imaginario.</p><ul id="e16812d0-616e-4fa3-b888-910d5efdb7a3" class="toggle"><li><details open=""><summary><strong>Función par</strong></summary><p id="b5a8e89a-d3b5-4335-a39b-f5d6b899d931" class="">Una función es par si cumple la siguiente relación a lo largo de su dominio:</p><figure id="c5d727e7-9cde-4ea9-bc7e-4e2f7340a6cc" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mo>−</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f(-x)=f(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord">−</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span></span></div></figure><p id="ea35fb9e-be67-416d-a5f4-cf19a4f98268" class="">Si lo notaste, esta relación nos dice que una función es par si es simétrica al eje vertical (eje Y). Por ejemplo, una parábola es una función par. <strong> Las funciones pares tienen simetría reflectiva a través del eje de las </strong><strong><em>y.</em></strong></p><figure id="57fac08c-6917-4c9e-87a8-d4933616ced9" class="image"><a href="Funciones%20%2058138/Untitled%2011.png"><img style="width:240px" src="Funciones%20%2058138/Untitled%2011.png"/></a></figure><p id="184dfad2-f702-4439-9451-1bff035fcb82" class="">
+</p></details></li></ul><ul id="b2ea02bb-4357-46fa-b3bd-e2541d103c96" class="toggle"><li><details open=""><summary><strong>Función impar</strong></summary><p id="e4d188d5-fed1-4da8-8317-b50cbc253dcb" class="">Una función es impar si cumple la siguiente relación a lo largo de su dominio:</p><figure id="a9bcd0ed-8bd7-4d23-b802-6a1eb788da46" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mo>−</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mo>−</mo><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f(-x)=-f(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord">−</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">−</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span></span></div></figure><p id="b1907a8c-4ac9-4320-b864-225ea5b538af" class="">Esta relación nos indica que una función es impar si es simétrica respecto a su origen de coordenadas. Por ejemplo, una función cúbica es impar. Las dos características o propiedades anteriores están muy relacionadas con la simetría.</p><p id="7740ce2a-ebe4-47ea-ba21-1ad50b731f43" class=""><strong>Las funciones impares tienen simetría rotacional de 180º con respecto del origen.</strong></p><figure id="d7ba1883-c380-4b78-b4da-efff69a50861" class="image"><a href="Funciones%20%2058138/Untitled%2012.png"><img style="width:240px" src="Funciones%20%2058138/Untitled%2012.png"/></a></figure></details></li></ul><ul id="93cd7ce2-988f-48ac-b5ed-164f1ecc3454" class="toggle"><li><details open=""><summary><strong>Función acotada</strong></summary><p id="62dcaf2a-b442-4b54-ae38-b8ef0c8c337c" class="">Una función es acotada si su codominio (también conocido como rango o imagen) se encuentra entre dos valores, es decir, está acotado. Esta definición se define como que hay un número <strong>m</strong> que para todo valor del dominio de la función se cumple que:</p><figure id="9f52c284-999f-4053-a6c1-b09ef77e855c" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>−</mo><mi>m</mi><mo>≤</mo><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>≤</mo><mi>m</mi></mrow><annotation encoding="application/x-tex">-m≤f(x)≤m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7719400000000001em;vertical-align:-0.13597em;"></span><span class="mord">−</span><span class="mord mathnormal">m</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">m</span></span></span></span></span></div></figure><p id="fb34f05e-01ce-4663-9213-58caeaa4567e" class="">Por ejemplo, la función seno o coseno están acotadas en el intervalo [-1, 1] dentro de su co-dominio.</p><figure id="7f171479-7286-42f8-a274-16928d8cbf7e" class="image"><a href="Funciones%20%2058138/Untitled%2013.png"><img style="width:288px" src="Funciones%20%2058138/Untitled%2013.png"/></a></figure></details></li></ul><ul id="c28c12a9-3ef5-45b4-a932-27122cea2d16" class="toggle"><li><details open=""><summary><strong>Funciones monótonas</strong></summary><p id="9bf93073-c492-4d51-ae0a-36f81c207325" class="">Estas funciones son útiles de reconocer o analizar debido a que nos permiten saber si una función crece o decrece en alguno de sus intervalos. Que algo sea monótono significa que no tiene variaciones. Entonces las funciones monótonas son aquellas que dentro de un intervalo <strong>I</strong>, perteneciente a los números reales, cumple alguna de estas propiedades:</p><figure id="51fcc85e-0f89-4945-b3d0-e5b3a4684abe" class="image"><a href="Funciones%20%2058138/Untitled%2014.png"><img style="width:480px" src="Funciones%20%2058138/Untitled%2014.png"/></a></figure><p id="34927587-8022-4182-93aa-56c94579f9e2" class=""><strong>1. La función es monótona y estrictamente creciente:</strong></p><figure id="cf3f3984-f214-45a5-8509-5c90f9ad4904" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>x</mi><mn>1</mn></msub><mo>&lt;</mo><msub><mi>x</mi><mn>2</mn></msub><mtext>  </mtext><mo>⟺</mo><mtext>  </mtext><mi>f</mi><mo stretchy="false">(</mo><msub><mi>x</mi><mn>1</mn></msub><mo stretchy="false">)</mo><mo>&lt;</mo><mi>f</mi><mo stretchy="false">(</mo><msub><mi>x</mi><mn>2</mn></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">x_1&lt;x_2 \iff f(x_1)&lt;f(x_2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6891em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.675em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">⟺</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span></div></figure><p id="a747cff3-9981-4ee7-9a61-c1fb9360c614" class="">S<em>i para todo x1 y x2 que pertenecen al intervalo I, tal que x1 sea menor a x2, si y solo si f(x1) sea menor a f(x2)”</em>. En palabras mucho más sencillas, lo que nos dice esta definición es que <strong>x1 </strong>siempre tiene que ser menor que <strong>x2 </strong>en nuestro intervalo <strong>I</strong>, y que al evaluar <strong>x2</strong>
+ en la función el resultado de esto siempre será mayor que si evaluamos la función en <strong>x1.</strong></p><p id="c98e0eb2-b5ad-4fa0-b081-cf8970d4404c" class=""><strong>2. La función es monótona y estrictamente decreciente:</strong></p><figure id="7cd84d1f-e38c-45aa-97e1-d352b3d7f865" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>x</mi><mn>1</mn></msub><mo>&lt;</mo><msub><mi>x</mi><mn>2</mn></msub><mtext>  </mtext><mo>⟺</mo><mtext>  </mtext><mi>f</mi><mo stretchy="false">(</mo><msub><mi>x</mi><mn>1</mn></msub><mo stretchy="false">)</mo><mo>&gt;</mo><mi>f</mi><mo stretchy="false">(</mo><msub><mi>x</mi><mn>2</mn></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">x_1&lt;x_2 \iff f(x_1)&gt;f(x_2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6891em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.675em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">⟺</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span></div></figure><p id="678f1201-1645-43f8-b964-56ec38b7d72c" class=""><strong>3. La función es monótona y creciente:</strong></p><figure id="f91809dd-06ef-4aff-b28a-8983e651ea73" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>x</mi><mn>1</mn></msub><mo>&lt;</mo><msub><mi>x</mi><mn>2</mn></msub><mtext>  </mtext><mo>⟺</mo><mtext>  </mtext><mi>f</mi><mo stretchy="false">(</mo><msub><mi>x</mi><mn>1</mn></msub><mo stretchy="false">)</mo><mo>≤</mo><mi>f</mi><mo stretchy="false">(</mo><msub><mi>x</mi><mn>2</mn></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">x_1&lt;x_2 \iff f(x_1)\le f(x_2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6891em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.675em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">⟺</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span></div></figure><p id="e6fc3260-f3e4-4911-aa00-6f205c32219d" class=""><strong>4. La función es monótona y decreciente:</strong></p><figure id="835bb8d1-7cad-4ab2-86b4-a0fdf61d8772" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>x</mi><mn>1</mn></msub><mo>&lt;</mo><msub><mi>x</mi><mn>2</mn></msub><mtext>  </mtext><mo>⟺</mo><mtext>  </mtext><mi>f</mi><mo stretchy="false">(</mo><msub><mi>x</mi><mn>1</mn></msub><mo stretchy="false">)</mo><mo>≥</mo><mi>f</mi><mo stretchy="false">(</mo><msub><mi>x</mi><mn>2</mn></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">x_1&lt;x_2 \iff f(x_1)\ge f(x_2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6891em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.675em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">⟺</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≥</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span></div></figure><p id="0976bbfd-53b8-4bd3-802c-f6cdf5736a2a" class="">
+</p></details></li></ul><ul id="97387dbf-9fef-4050-948c-51c70407f927" class="toggle"><li><details open=""><summary><strong>Funciones periódicas</strong></summary><p id="be072b24-5f94-4136-9d73-871f58943810" class="">Las funciones periódicas son aquellas que se repiten cada cierto periodo, este periodo se denomina con la letra <strong>T</strong>. La relación que debe cumplir la función para ser periódica es la siguiente.</p><figure id="9aee110d-e3de-4456-a58f-e36c7fc43f78" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo>+</mo><mi>T</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mi>T</mi><mo mathvariant="normal">≠</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">f(x)= f(x+T), T \ne 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel"><span class="mrel"><span class="mord vbox"><span class="thinbox"><span class="rlap"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="inner"><span class="mord"><span class="mrel"></span></span></span><span class="fix"></span></span></span></span></span><span class="mrel">=</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span></span></div></figure><p id="ae08d26c-bb81-4029-a660-95cfa148a19b" class="">Por ejemplo, la función seno y coseno son funciones periódicas con un periodo T = 2π. Es decir que si nosotros calculamos f(x) y calculamos f(x + 2π) en la función seno el valor que nos den ambas expresiones es el mismo.</p><figure id="24df2a2e-4787-4c8c-aed4-7985f8674efe" class="image"><a href="Funciones%20%2058138/Untitled%2015.png"><img style="width:384px" src="Funciones%20%2058138/Untitled%2015.png"/></a></figure></details></li></ul><ul id="9d461706-357d-4aea-a0ca-1681e5ba7744" class="toggle"><li><details open=""><summary><strong>Funciones cóncavas y convexas</strong></summary><figure id="95803744-1d5d-4425-9ce2-542e38d2fc17" class="image"><a href="Funciones%20%2058138/Untitled%2016.png"><img style="width:336px" src="Funciones%20%2058138/Untitled%2016.png"/></a></figure><p id="e3b2bf55-e051-4af8-a3bd-4952002c47e2" class="">Se dice que una función dentro de un intervalo <strong>es convexa </strong>si la función “abre hacia arriba”. </p><p id="1561c6ab-8707-48b4-b328-b91776fc07a4" class="">Se dice que una función dentro de un intervalo <strong>es cóncava </strong>si la función “abre hacia abajo”</p></details></li></ul></details></li></ul><ul id="0321e810-ad2f-40f3-92e6-2963f3a6010c" class="toggle"><li><details open=""><summary><strong>El perceptrón </strong></summary><figure id="a59a750d-2381-448e-914a-21c84e08dbcb" class="image"><a href="Funciones%20%2058138/Untitled%2017.png"><img style="width:384px" src="Funciones%20%2058138/Untitled%2017.png"/></a><figcaption><strong>La neurona</strong></figcaption></figure><p id="e9eab093-7f44-43fd-85d0-a0bd5b39b8fe" class="">El perceptrón simple es la red neuronal artificial más antigua. Su origen tuvo lugar en el año 1957 por el psicólogo Frank Rosenblatt, consistía en un clasificador binario o discriminador lineal, esto quiere decir que a partir de un entrenamiento con datos el perceptrón era capaz de reconocer patrones y tomar decisiones.</p><figure id="14177e99-caa5-42b9-a18c-3c5d36a267ed" class="image"><a href="Funciones%20%2058138/Untitled%2018.png"><img style="width:384px" src="Funciones%20%2058138/Untitled%2018.png"/></a></figure><p id="aabbb19a-a758-4d16-ab40-92a24b2b0c45" class=""><strong>Elementos de un perceptrón </strong></p><ul id="56837259-b458-402c-b811-d6e2acbea5c6" class="bulleted-list"><li style="list-style-type:disc">Señal de entrada == Interpretar características (color, precio, tamaño, calidad, fabricante, país de origen, etc) -&gt; Se leen como 1 &amp; 0.</li></ul><ul id="5e019270-043d-4afe-bc1b-50ad1638c7ba" class="bulleted-list"><li style="list-style-type:disc">Peso sináptico == Ponderan el valor de la señal de entrada, le ponen un valor de que tan importante es la señal de entrada que acaba de entrar.</li></ul><ul id="545a6218-333a-4c38-9935-57f4f8625649" class="bulleted-list"><li style="list-style-type:disc">Unión sumadora == Suma todos los valores de las Señales de entradas multiplicadas por sus respectivos Pesos sinápticos, y generamos una combinación lineal.</li></ul><ul id="d7f181cd-1ca0-4607-9368-f06d2561f1f1" class="bulleted-list"><li style="list-style-type:disc">Función de activación == El resultado de la Unión sumadora lo pasamos por aquí para que nos de un comportamiento NO lineal.</li></ul><figure id="e058bbdd-d8fc-488e-8a38-52f625b95eae" class="image"><a href="Funciones%20%2058138/Untitled%2019.png"><img style="width:384px" src="Funciones%20%2058138/Untitled%2019.png"/></a><figcaption><strong>Red Neuronal</strong></figcaption></figure></details></li></ul><ul id="b0cd86af-d475-4bbd-8ce3-78600ba3d829" class="toggle"><li><details open=""><summary><strong><strong>Funciones de activación</strong></strong></summary><figure id="9ce2e6ff-4bf9-4899-b47d-ed32dc6e4021" class="image"><a href="Funciones%20%2058138/1_5pkDpvN1oZN6wjrtMdAreA.gif"><img style="width:624px" src="Funciones%20%2058138/1_5pkDpvN1oZN6wjrtMdAreA.gif"/></a></figure><p id="bed495c6-bc1a-4176-9dc3-afcad40183fd" class="">A la salida de la neurona, puede existir, un filtro, función limitadora o umbral, que modifica el valor resultado o impone un límite que se debe sobrepasar para poder proseguir a otra neurona. Esta función se conoce como función de activación. Una función de activación es, por tanto, una función que transmite la información generada por la combinación lineal de los pesos y las entradas, es decir son la manera de transmitir la información por las conexiones de salida. La información puede transmitirse sin modificaciones, función identidad, o bien que no transmita la información. Como el objetivo es que la red neuronal sea capaz de resolver problemas cada vez más complejos, las funciones de activación generalmente harán que los modelos sean no lineales. Entre las funciones de activación más conocidas o más usadas se encuentran:</p><figure id="34cef7fa-aac6-486e-9524-9f7b8b064047" class="image"><a href="Funciones%20%2058138/Untitled%2020.png"><img style="width:838px" src="Funciones%20%2058138/Untitled%2020.png"/></a></figure><ul id="54181e69-9f66-464b-9c81-17fe8124915b" class="toggle"><li><details open=""><summary><strong>Función lineal o identidad</strong></summary><figure id="88b12b4d-d6a6-46b2-9f8e-d8985347c4b7" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>y</mi><mo>=</mo><mi>m</mi><mi>x</mi><mo>+</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">y=mx+b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathnormal">m</span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal">b</span></span></span></span></span></div></figure><p id="d905a1f1-3c7d-45d5-8fc1-3c03c9739eb3" class="">Mantener valores a lo largo de un proceso, predecir venta.</p><pre id="6ece7238-8ae1-49b2-96f1-df14679f3906" class="code code-wrap"><code>def f(x):
+  return x
+
+plt.plot(x, f(x))
+plt.grid()</code></pre></details></li></ul><ul id="1aa7bd3a-78dd-4866-b89a-4f63663839f4" class="toggle"><li><details open=""><summary><strong>Función escalón o de Heaviside</strong></summary><p id="5a8c9fa8-e35e-4118-8efc-1ece030a2541" class="">Se utilizan para clasificaciones categóricas, ej. binarias</p><figure id="f82a86c9-d92f-415c-8dfc-0d8335a32ffc" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>H</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mrow><mo fence="true">{</mo><mtable rowspacing="0.3600em" columnalign="left left" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mn>0</mn><mo separator="true">,</mo></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mspace width="1em"/><mtext>para, </mtext><mi>x</mi><mo>&lt;</mo><mn>0</mn></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mn>1</mn><mo separator="true">,</mo></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mspace width="1em"/><mtext>para, </mtext><mi>x</mi><mo>≥</mo><mn>0</mn></mrow></mstyle></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">H(x) =      \begin{cases}        0, &amp;\quad \text{para, } x &lt; 0 \\        1,  &amp;\quad\text{para, } x \ge 0 \\     \end{cases}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:3.0000299999999998em;vertical-align:-1.25003em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size4">{</span></span><span class="mord"><span class="mtable"><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.69em;"><span style="top:-3.69em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord">0</span><span class="mpunct">,</span></span></span><span style="top:-2.25em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord">1</span><span class="mpunct">,</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.19em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:1em;"></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.69em;"><span style="top:-3.69em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mspace" style="margin-right:1em;"></span><span class="mord text"><span class="mord">para, </span></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord">0</span></span></span><span style="top:-2.25em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mspace" style="margin-right:1em;"></span><span class="mord text"><span class="mord">para, </span></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≥</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.19em;"><span></span></span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></div></figure><pre id="52fa1e6b-af6b-4e22-9824-db7c166c912f" class="code code-wrap"><code>def H(x):
+  Y = np.zeros(len(x))
+  for idx,x in enumerate(x):
+    if x&gt;=0:
+      Y[idx]=1
+  return Y 
+
+N=1000
+y = H(x)
+
+plt.plot(x,y)
+plt.grid()</code></pre></details></li></ul><ul id="fafc6512-f0b2-47ae-bd27-e0e27844245a" class="toggle"><li><details open=""><summary><strong>Función sigmoide</strong></summary><p id="f0644288-c022-4795-9c17-23d558816d1a" class="">Se utiliza para la regresión logística, para probabilidades.</p><figure id="bda7d7ad-2c76-456b-97bd-5ab0b8875fe1" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mn>1</mn><mrow><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mo>−</mo><mi>x</mi></mrow></msup></mrow></mfrac></mrow><annotation encoding="application/x-tex">f(x)=\frac{1}{1-e^{-x}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.09077em;vertical-align:-0.7693300000000001em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.697331em;"><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mathnormal mtight">x</span></span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693300000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></div></figure><pre id="2327b9f6-efe1-41b2-898b-aca9a051c61e" class="code code-wrap"><code>def f(x):
+  return 1/(1 + np.exp(-x))
+    
+
+N=1000
+
+y = f(x)
+
+plt.plot(x,y)
+plt.grid()</code></pre><p id="373130d3-dc9f-45a8-91c9-7a25590f0bd6" class="">Aunque la función sigmoidea y su derivada es <em><strong>simple </strong></em> y ayuda a reducir el tiempo requerido para hacer modelos, existe un gran inconveniente de <em><strong>pérdida </strong></em>de <em><strong>información</strong></em>
+ debido a que la derivada tiene un rango corto.</p><figure id="59f4b65a-082e-4311-98e9-034a86c746f8" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>f</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo>=</mo><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f&#x27;= f(x)(1 -f(x))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.996332em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.801892em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">))</span></span></span></span></span></div></figure><p id="0017ab43-2351-461c-9c4b-ed72350d6067" class="">Por lo tanto, cuantas más capas haya en nuestra red neuronal o <em>más profunda sea</em> nuestra red neuronal, más información se comprime y se pierde en cada capa y esto se amplifica y causa una mayor pérdida de datos en general.</p><figure id="6cbec97f-35c5-41f2-a88f-48cf4bc9f724" class="image"><a href="Funciones%20%2058138/Untitled%2021.png"><img style="width:1081px" src="Funciones%20%2058138/Untitled%2021.png"/></a></figure><p id="9e835d17-8eae-4ad0-9ead-6c22b607b533" class=""><em>Además de la función logística , las funciones sigmoides incluyen la arcotangente ordinaria , la tangente hiperbólica , la función de Gudermann y la función de error , pero también la función logística generalizada y las funciones algebraicas.</em></p></details></li></ul><ul id="e6daddff-1520-4f31-ade1-173a0476c61d" class="toggle"><li><details open=""><summary><strong>Función tangente hiperbólica</strong></summary><p id="e900a6c6-ce5b-41a8-ab97-993b06d304fe" class="">Se utiliza para  para escalamiento</p><figure id="ddc4201e-5679-4d8f-bd94-5c7af011e09f" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mn>2</mn><mrow><mn>1</mn><mo>+</mo><msup><mi>e</mi><mrow><mo>−</mo><mn>2</mn><mi>x</mi></mrow></msup></mrow></mfrac><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">f(x)=\frac{2}{1+e^{-2x}}-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.09077em;vertical-align:-0.7693300000000001em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.740108em;"><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">2</span><span class="mord mathnormal mtight">x</span></span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693300000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span></span></div></figure><pre id="6034a16b-6c85-4686-9f2e-db893b09618d" class="code code-wrap"><code>def f(x):
+  return np.tanh(x)
+    
+
+N=1000
+
+y = f(x)
+
+plt.plot(x,y)
+plt.grid()</code></pre></details></li></ul><ul id="eb4443bd-e23e-4488-b2c3-184abf8e322e" class="toggle"><li><details open=""><summary><strong>Función ReLU</strong></summary><p id="c35859ad-441b-453f-8006-4d17b2ca0bf1" class="">Se utilizan para simulación de “neuronas muertas”.</p><figure id="870e317e-2e1d-4cf3-9f5f-bf073af7e240" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>R</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mi>m</mi><mi>a</mi><mi>x</mi><mo stretchy="false">(</mo><mn>0</mn><mo separator="true">,</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">R(x)=max(0,x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">ma</span><span class="mord mathnormal">x</span><span class="mopen">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span></span></div></figure><pre id="f25a3b3f-593d-485c-b8c2-9351d6a7d4d3" class="code code-wrap"><code>def f(x):
+  return np.maximum(x,0)
+    
+
+N=1000
+
+y = f(x)
+
+plt.plot(x,y)
+plt.grid()</code></pre></details></li></ul></details></li></ul><ul id="99fd7350-8ff0-49bd-b58b-116da7ee5ac4" class="toggle"><li><details open=""><summary><strong>Regresión lineal simple</strong></summary><p id="42665b10-4f3e-4e80-899f-f3d3429a3bc9" class="">El objetivo de un modelo de regresión es tratar de explicar la relación que existe entre una
+variable dependiente (variable respuesta) Y un conjunto de variables independientes (variables
+explicativas) X1,..., Xn.
+En un modelo de regresión lineal simple tratamos de explicar la relación que existe entre la
+variable respuesta Y y una única variable explicativa X.</p><p id="2b4d5c2c-03b8-4701-bd74-acadd8fd0d88" class="">
+</p><p id="cb543109-8357-4803-864d-4256afa2e2df" class="">La Regresión Lineal es una técnica paramétrica utilizada para predecir variables continuas, dependientes, dado un conjunto de variables independientes. Es de naturaleza paramétrica porque hace ciertas suposiciones basadas en el conjunto de datos. Si el conjunto de datos sigue esas suposiciones, la regresión arroja resultados increíbles, de lo contrario, tiene dificultades para proporcionar una precisión convincente.</p></details></li></ul><ul id="87051a95-64a2-49e9-b294-4e6ef819294a" class="toggle"><li><details open=""><summary><strong>Error Cuadrático Medio</strong></summary><p id="e914a5d9-eac0-412f-9c1d-bf2ae1997902" class="">El error cuadrático(MSE) mide el promedio de los errores elevados al cuadrado.</p><figure id="d3bf7e37-5238-45d5-a181-aa2a7512418e" class="image"><a href="Funciones%20%2058138/Untitled%2022.png"><img style="width:480px" src="Funciones%20%2058138/Untitled%2022.png"/></a></figure><p id="59ba2eff-1a8c-4757-a128-af45b81e9354" class="">La ecuación matemática que proporcionará el error cuadrático medio para todos los puntos.</p><figure id="76046c89-f800-4232-8d4a-8f831e8fb29c" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>M</mi><mi>S</mi><mi>E</mi><mo>=</mo><mfrac><mn>1</mn><mi>N</mi></mfrac><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>N</mi></munderover><mo stretchy="false">(</mo><msub><mi>y</mi><mi>i</mi></msub><mo>−</mo><msub><mover accent="true"><mi>y</mi><mo>^</mo></mover><mi>i</mi></msub><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">MSE= \frac 1 N \sum_{i=1}^N (y_i - \hat{y}_i) ^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">MSE</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:3.106005em;vertical-align:-1.277669em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10903em;">N</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.8283360000000002em;"><span style="top:-1.872331em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.050005em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3000050000000005em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.277669em;"><span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.1141079999999999em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.19444em;"><span class="mord">^</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.19444em;"><span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span></div></figure></details></li></ul></div></article></body></html>
